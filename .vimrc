@@ -11,8 +11,14 @@ set t_Co=256
 
 set nocompatible
 
+" 行数表示
 set number
+" 横線表示
 set cursorline
+" 縦線表示
+set cursorcolumn
+" ルーラー表示
+set ruler
 set laststatus=2
 set cmdheight=2
 set showmatch
@@ -53,8 +59,11 @@ set shellslash
 set wildmenu wildmode=list:longest,full
 set history=10000
 
+" ビープ音を鳴らさない
+set vb t_vb=
 set visualbell t_vb=
 set noerrorbells
+
 " 前回の位置を記憶
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
