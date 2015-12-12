@@ -1,7 +1,12 @@
 syntax on
-colorscheme molokai
+"syntax enable
+set background=dark
+"set background=light
+"colorscheme molokai
 "colorscheme elflord
 "colorscheme koehler
+colorscheme solarized
+
 set t_Co=256
 
 set nocompatible
@@ -13,7 +18,8 @@ set cmdheight=2
 set showmatch
 set helpheight=999
 set list
-set listchars=tab:>\ ,eol:$
+"set listchars=tab:→,eol:⏎
+set listchars=tab:>\ ,eol:↵
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set scrolloff=8
