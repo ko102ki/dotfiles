@@ -1,62 +1,10 @@
 "----------------------------------------------------
 " 文字コード
 "----------------------------------------------------
-" 文字コードの自動認識
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
-" 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-"if exists('&ambiwidth')
-"  set ambiwidth=double
-"endif
+" 文字コードをUTF-8にする
+set encoding=utf-8
+set fileencoding=utf-8
+
 "----------------------------------------------------
 " 基本的な設定
 "----------------------------------------------------
@@ -66,11 +14,6 @@ set nocompatible
 set fileformats=unix,dos,mac
 " ビープ音を鳴らさない
 set vb t_vb=
-" バックスペースキーで削除できるものを指定
-" indent  : 行頭の空白
-" eol     : 改行
-" start   : 挿入モード開始位置より手前の文字
-set backspace=indent,eol,start
 
 "----------------------------------------------------
 " バックアップ関係
@@ -79,7 +22,7 @@ set backspace=indent,eol,start
 set nobackup
 " ファイルの上書きの前にバックアップを作る
 " (ただし、backup がオンでない限り、バックアップは上書きに成功した後削除される)
-set writebackup
+"set writebackup
 " バックアップをとる場合
 "set backup
 " バックアップファイルを作るディレクトリ
@@ -107,9 +50,9 @@ set incsearch
 " 背景色を黒くする
 set background=dark
 " 各種テーマを適用する
-colorscheme solarized
+"colorscheme solarized
 "set background=light
-"colorscheme molokai
+colorscheme molokai
 "colorscheme elflord
 "colorscheme koehler
 " ターミナル上で256色を有効にする
@@ -120,7 +63,7 @@ set t_Co=256
 " 表示関係
 "----------------------------------------------------
 " タイトルをウインドウ枠に表示する
- set title
+" set title
 " 行番号を表示
 set number
 " ルーラーを表示
@@ -153,7 +96,8 @@ highlight Comment ctermfg=DarkCyan
 set wildmenu
 
 " 入力されているテキストの最大幅
-" (行がそれより長くなると、この幅を超えないように空白の後で改行される)を無効にする
+" (行がそれより長くなるとこの幅を超えないように
+"  空白の後で改行される。0で無効)
 set textwidth=0
 " ウィンドウの幅より長い行は折り返して、次の行に続けて表示する
 set wrap
@@ -165,7 +109,7 @@ match ZenkakuSpace /　/
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l/%L:%p%%>
 " ステータスラインの色
-highlight StatusLine   term=NONE cterm=NONE ctermfg=black ctermbg=white
+"highlight StatusLine   term=NONE cterm=NONE ctermfg=black ctermbg=white
 
 "----------------------------------------------------
 " インデント
@@ -181,15 +125,11 @@ set softtabstop=4
 set shiftwidth=4
 " タブを挿入するとき、代わりに空白を使う
 set expandtab
-"set noexpandtab
 
 "----------------------------------------------------
 " オートコマンド
 "----------------------------------------------------
-"if has("autocmd")
-    " ファイルタイプ別インデント、プラグインを有効にする
-"    filetype plugin indent on
-    " カーソル位置を記憶する
+" カーソル位置を記憶する
     autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
@@ -204,10 +144,11 @@ set mouse=a
 " ヤンクレジスタとシステムのクリップボードを共有する(対応バージョンのみ)
 set clipboard=unnamed,unnamedplus
 " ファイル更新時に自動再読み込み
-set autoread
+"set autoread
 " 行頭行末の左右移動で行をまたぐ
 set whichwrap=b,s,h,l,<,>,[,]
 " バッファを切替えてもundoの効力を失わない
 set hidden
 " 起動時のメッセージを表示しない
 set shortmess+=I
+
