@@ -47,12 +47,14 @@ set incsearch
 "----------------------------------------------------
 " テーマ設定
 "----------------------------------------------------
-" 背景色を黒くする
-set background=dark
-" 各種テーマを適用する
-"colorscheme solarized
+" 背景色を黒または白にする
+"set background=dark
 "set background=light
-colorscheme molokai
+
+" 各種テーマを適用する
+colorscheme Tomorrow-Night-Bright
+"colorscheme solarized
+"colorscheme molokai
 "colorscheme elflord
 "colorscheme koehler
 " ターミナル上で256色を有効にする
@@ -85,13 +87,13 @@ set laststatus=2
 " 括弧入力時の対応する括弧を表示
 set showmatch
 " 対応する括弧の表示時間を2にする
-" set matchtime=2
+"set matchtime=2
 " シンタックスハイライトを有効にする
 syntax on
 " 検索結果文字列のハイライトを有効にする
 set hlsearch
 " コメント文の色を変更
-highlight Comment ctermfg=DarkCyan
+"highlight Comment ctermfg=DarkCyan
 " コマンドライン補完を拡張モードにする
 set wildmenu
 
