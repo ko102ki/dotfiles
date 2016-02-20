@@ -152,5 +152,5 @@ set whichwrap=b,s,h,l,<,>,[,]
 " バッファを切替えてもundoの効力を失わない
 set hidden
 " 起動時のメッセージを表示しない
-set shortmess+=I
+"set shortmess+=I
 
