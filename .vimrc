@@ -20,6 +20,10 @@ set vb t_vb=
 "----------------------------------------------------
 " バックアップをとらない
 set nobackup
+" swapファイルを作らない
+set noswapfile
+" undoファイルを作らない
+set noundofile
 " ファイルの上書きの前にバックアップを作る
 " (ただし、backup がオンでない限り、バックアップは上書きに成功した後削除される)
 "set writebackup
@@ -29,6 +33,8 @@ set nobackup
 "set backupdir=~/backup
 " スワップファイルを作るディレクトリ
 "set directory=~/swap
+" undoファイルを作るディレクトリ
+"set undodir=~/undodir
 
 "----------------------------------------------------
 " 検索関係
