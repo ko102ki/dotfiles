@@ -24,6 +24,8 @@ set nobackup
 set noswapfile
 " undoファイルを作らない
 set noundofile
+" .viminfoファイルを作らない
+set viminfo=
 " ファイルの上書きの前にバックアップを作る
 " (ただし、backup がオンでない限り、バックアップは上書きに成功した後削除される)
 "set writebackup
