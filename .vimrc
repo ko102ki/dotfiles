@@ -42,13 +42,13 @@ set viminfo=
 " 検索関係
 "----------------------------------------------------
 " コマンド、検索パターンを100個まで履歴に残す
-set history=100
+"set history=100
 " 検索の時に大文字小文字を区別しない
 set ignorecase
 " 検索の時に大文字が含まれている場合は区別して検索する
 set smartcase
 " 最後まで検索したら先頭に戻る
-set wrapscan
+"set wrapscan
 " インクリメンタルサーチを有効にする
 set incsearch
 
@@ -60,9 +60,7 @@ set incsearch
 "set background=light
 
 " 各種テーマを適用する
-colorscheme Tomorrow-Night-Bright
-"colorscheme solarized
-"colorscheme molokai
+colorscheme pablo
 "colorscheme elflord
 "colorscheme koehler
 " ターミナル上で256色を有効にする
@@ -81,11 +79,11 @@ set ruler
 " 横線の表示
 set cursorline
 " 縦線の表示
-set cursorcolumn
+"set cursorcolumn
 " タブと改行を可視化
 set list
 " tab = タブ, eol = 改行
-set listchars=tab:→\ ,eol:↵
+set listchars=tab:→\ ,eol:⏎
 "非2バイト文字環境用
 "set listchars=tab:>\ ,eol:$
 " 入力中のコマンドをステータスに表示する
@@ -113,11 +111,11 @@ set textwidth=0
 set wrap
 
 " 全角スペースの表示
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match ZenkakuSpace /　/
+"highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+"match ZenkakuSpace /　/
 
 " ステータスラインに表示する情報の指定
-set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l/%L:%p%%>
+"set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l/%L:%p%%>
 " ステータスラインの色
 "highlight StatusLine   term=NONE cterm=NONE ctermfg=black ctermbg=white
 
@@ -128,11 +126,11 @@ set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=<%l/%L:%
 set autoindent
 set smartindent
 " タブが対応する空白の数
-set tabstop=4
+set tabstop=2
 " タブやバックスペースの使用等の編集操作をするときに、タブが対応する空白の数
-set softtabstop=4
+set softtabstop=2
 " インデントの各段階に使われる空白の数
-set shiftwidth=4
+set shiftwidth=2
 " タブを挿入するとき、代わりに空白を使う
 set expandtab
 
@@ -158,7 +156,7 @@ set clipboard=unnamed,unnamedplus
 " 行頭行末の左右移動で行をまたぐ
 set whichwrap=b,s,h,l,<,>,[,]
 " バッファを切替えてもundoの効力を失わない
-set hidden
+"set hidden
 " 起動時のメッセージを表示しない
-"set shortmess+=I
+set shortmess+=I
 
