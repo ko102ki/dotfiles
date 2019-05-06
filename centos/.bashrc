@@ -10,6 +10,10 @@ fi
 
 # User specific aliases and functions
 
+# command alias
+alias l='ls -lh'
+alias la='ls -lah'
+
 # color term
 if [ $(id -u) -eq 0 ];
 then
